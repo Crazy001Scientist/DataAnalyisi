@@ -35,7 +35,7 @@ from portfolioProgect..covid
 where continent is not null
 order by location, date
 
---percentage of population vaccinated
+--percentage of population(infected) vaccinated
 select continent, location, date, new_cases,
 sum(new_cases) over (partition by location order by location, date)
 as TotalCasesCount,

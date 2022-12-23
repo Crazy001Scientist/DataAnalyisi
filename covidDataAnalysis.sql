@@ -1,6 +1,6 @@
 
 select *
-from portfolioProgect..covid
+from portfolioProject..covid
 order by location
 
 --deth percantage
@@ -13,7 +13,7 @@ order by 1,2
 --total death count in the continents
  select continent, 
 Max(convert(int, total_deaths)) as TotalDeathCount
-from portfolioProgect..covid
+from portfolioProject..covid
 where continent is not NULL
 group by continent
 order by TotalDeathCount desc
@@ -21,7 +21,7 @@ order by TotalDeathCount desc
 --total death in a location
  select continent, location, 
 Max(convert(int, total_deaths)) as TotalDeathCount
-from portfolioProgect..covid
+from portfolioProject..covid
 where continent is not null
 group by continent, location
 order by TotalDeathCount desc
@@ -31,7 +31,7 @@ select continent, location, date, convert(bigint, new_vaccinations) as Vaccinati
 sum(convert(bigint, new_vaccinations)) 
 over (partition by location order by location, date)
 as TotalVaccinetionCount
-from portfolioProgect..covid
+from portfolioProject..covid
 where continent is not null
 order by location, date
 
@@ -45,6 +45,6 @@ over (partition by location order by location, date)
 as TotalVaccinetionCount,
 (people_vaccinated/nullif(total_cases, 0))*100 as PersentageOfVacciantedInfectedPeople,
 (people_vaccinated/population)*100 as PersentageOfPopulationVaccianted
-from portfolioProgect..covid
+from portfolioProject..covid
 where continent is not null
 order by location, date
